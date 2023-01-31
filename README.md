@@ -1,0 +1,1 @@
+Boilerplate para dashboards Sankhya
