@@ -9,7 +9,6 @@ app.controller('myCtrl', function ($scope, $q, customUtils) {
    
     let p = customUtils.doRequest(select,from,where,true,'DADOS');
 
-
     p.then((result) => {
         debugger;
     })

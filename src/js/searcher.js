@@ -19,10 +19,10 @@ angular.module("moduloTeste", ['standalone.serviceproxy']).service("customUtils"
         * @param {String} ID           Identificador da pesquisa
         * @return {Promise}            Promessa da Pesquisa
         */
-        var doRequest_old = function (select, from, where, fullLine, ID) {
+        function doRequest_old(select, from, where, fullLine, ID) {
             let deferred = $q.defer();
 
-            let p = customUtils.loadFromQuery_old(select, from, where, fullLine);
+            let p = loadFromQuery_old(select, from, where, fullLine);
             p.then(function (response) {
                 deferred.resolve({ id: ID, response: response });
             }, function (erro) {
@@ -41,10 +41,10 @@ angular.module("moduloTeste", ['standalone.serviceproxy']).service("customUtils"
         * @param {String} ID           Identificador da pesquisa
         * @return {Promise}            Promessa da Pesquisa
         */
-        var doRequest = function (select, from, where, fullLine, ID) {
+        function doRequest(select, from, where, fullLine, ID) {
             let deferred = $q.defer();
 
-            let p = customUtils.loadFromQuery(select, from, where, fullLine);
+            let p = loadFromQuery(select, from, where, fullLine);
             p.then(function (response) {
                 deferred.resolve({ id: ID, response: response });
             }, function (erro) {

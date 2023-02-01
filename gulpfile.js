@@ -10,7 +10,7 @@ function build(){
   var index = src('src/index.html')
   .pipe(dest('build/src'));
   var lib = src('src/libs/**')
-  .pipe(dest('build/src/lib'));
+  .pipe(dest('build/src/libs'));
   var js = src('src/js/**')
   .pipe(dest('build/src/js'));
   var node = src('src/node_modules/**')

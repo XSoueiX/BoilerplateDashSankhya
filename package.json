@@ -9,6 +9,6 @@
     "gulp":"gulp",
     "zip":"gulp zip",
     "clear": "gulp clear",
-    "build": "gulp build"
+    "build": "gulp"
   }
 }
