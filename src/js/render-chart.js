@@ -5,11 +5,9 @@ var Render = {
      * @param {String} container Selector de onde será exibido o Gráfico
      * @param {String} titulo Titulo do gráfico
      * @param {Array.<{name:String, y:Number, drilldown:String}>} data Array com os dados de exibição do gráfico inicial
-     * @param {Array.<{name:String, id:String, data:Array.<{name:String, y:Number, drilldown:String}>}>} drilldata Array com os dados de drilldown
-     * @param {Array.<{nome:String, sulfixo:String}>} unidade Array com nome e sulfixo da unidade dos valores
      * @returns 
      */
-    doChart: function (container, titulo, data, drilldata, unidade) {
+    doChart: function (container, titulo, data) {
         // debugger;
         let cores = ["#7cb5ec", "#434348", "#90ed7d", "#f7a35c", "#8085e9", "#f15c80", "#e4d354", "#2b908f", "#f45b5b", "#91e8e1", "#3a34eb"];
 
@@ -48,7 +46,7 @@ var Render = {
                 enabled: false
             },
             tooltip: {
-                pointFormat: unidade.nome + ': <b>{point.y:.2f} ' + unidade.sulfixo + '</b>',
+                pointFormat: ': <b>{point.y:.2f}</b>',
                 valueSuffix: ' t'
             },
             plotOptions: {
@@ -59,7 +57,7 @@ var Render = {
                     colors: cores,
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.y:.2f} '+ unidade.sulfixo,
+                        format: '<b>{point.name}</b>: {point.y:.2f} ',
                         style: {
                             fontSize: '1.25em'
                         }
@@ -74,30 +72,6 @@ var Render = {
             ,lang: {
                 drillUpText: '◁ {series.name}'
             },
-            drilldown: {
-                activeAxisLabelStyle: {
-                    textDecoration: 'none'
-                },
-                activeDataLabelStyle: {
-                    textDecoration: 'none'
-                },
-                drillUpButton: {
-                    relativeTo: 'spacingBox',
-                    position: {
-                        align: 'left',
-                        y: 10,
-                        x: 0
-                    },
-                    theme: {
-                        fill: 'red',
-                        'stroke-width': 1,
-                        stroke: 'black',
-                        r: 0
-                    }
-
-                },
-                series: drilldata
-            }
         });
 
     }
