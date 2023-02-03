@@ -7,6 +7,10 @@ Boilerplate para dashboards Sankhya
 
 instalar node
 
+Recomendado:
+
+VSCode
+
 ## 🚀 Instalando BoilerPlate Sankhya
 
 Para instalar o BoilerPlate Sankhya, siga estas etapas:
