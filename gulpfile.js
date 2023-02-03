@@ -9,12 +9,12 @@ var FormData = require('form-data');
 const fs = require('fs');
 const form = new FormData();
 
-const url = '' //informar URL do servidor sankhya que deseja utilizar
+const url = 'http://10.0.0.184:8280' //informar URL do servidor sankhya que deseja utilizar
 
-let usuario = '' //Informar usuario para autentificação
-let senha = '' //Informar senha para autentificação
+let usuario = 'PAULO.LIMA' //Informar usuario para autentificação
+let senha = 87898899 //Informar senha para autentificação
 
-let codgdg = ''  // Numero unico do dashboard
+let codgdg = 302  // Numero unico do dashboard
 
 
 
@@ -27,10 +27,12 @@ function build(){
   .pipe(dest('build/src/libs'));
   var js = src('src/js/**')
   .pipe(dest('build/src/js'));
+  var css = src('src/css/**')
+  .pipe(dest('build/src/css'));
   var node = src('src/node_modules/**')
   .pipe(dest('build/src/node_modules'));
 
-  return merge(entry, index, lib, js, node);
+  return merge(entry, index, lib, js, css, node);
 };
 
 function zip() {
@@ -65,6 +67,11 @@ try {
     }
 })
 // console.log(response.data.responseBody.jsessionid['$']);
+
+if(response.data.status === '0'){
+  console.log(response.data);
+  throw new Error('Erro no login');
+}
 
 let jsessionid = response.data.responseBody.jsessionid['$']
 

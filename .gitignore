@@ -171,3 +171,5 @@ dist
 */render-chart.js
 
 build/
+
+gulpfile.js
