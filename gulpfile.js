@@ -1,8 +1,20 @@
 
 const { src, dest, series } = require('gulp');
+const axios = require('axios');
 var clean   = require('gulp-clean');
 var gzip     = require('gulp-zip');
 var merge   = require('merge-stream');
+var FormData = require('form-data');
+
+const fs = require('fs');
+const form = new FormData();
+
+const url = '' //informar URL do servidor sankhya que deseja utilizar
+
+let usuario = '' //Informar usuario para autentificação
+let senha = '' //Informar senha para autentificação
+
+
 
 function build(){
   var entry = src('src/entryPoint.jsp')
@@ -34,10 +46,79 @@ function clear() {
   return merge(build, dist);
 };
 
+async function login(){
+try {
+  const response = await axios.post(url+'/mge/service.sbr?serviceName=MobileLoginSP.login&outputType=json',{
+    "serviceName": "MobileLoginSP.login",
+    "requestBody": {
+        "NOMUSU": {
+            "$": usuario
+        },
+        "INTERNO": {
+            "$": senha
+        },
+        "KEEPCONNECTED": {
+            "$": "S"
+        }
+    }
+})
+// console.log(response.data.responseBody.jsessionid['$']);
+
+let jsessionid = response.data.responseBody.jsessionid['$']
+
+const stream = fs.createReadStream('dist/archive.zip');
+
+form.append('arquivo',stream);
+const formHeaders = form.getHeaders();
+
+const sended = await axios.post(url+'/mge/sessionUpload.mge?sessionkey=Gadget_ZIP&fitem=S&salvar=S&useCache=N',
+form,{
+  headers: {
+      ...form.getHeaders(),
+      'Content-Type': 'multipart/form-data',
+      "Cookie": `JSESSIONID=${jsessionid}`
+  }
+})
+
+const update = await axios.get(url+'/mge/service.sbr?serviceName=CRUDServiceProvider.saveRecord&outputType=json&mgeSession='+jsessionid
+,{headers: {
+  "Cookie": `JSESSIONID=${jsessionid}`
+},
+data: { 
+  "requestBody":{
+     "dataSet":{
+        "rootEntity":"Gadget",
+        "includePresentationFields":"N",
+        "dataRow":{
+                     "key" : {
+                           "NUGDG": {
+                     "$": 303
+                 }
+                       },
+           "localFields": {
+                               "HTML5" : { "$" : "$file.session.key{Gadget_ZIP}"}
+             }
+        }, "entity":{
+           "fieldset":{
+              "list":""
+           }
+        }
+     }
+  }
+}})
+
+console.log(update.data.responseBody.entities)
+} catch (error) {
+  console.error(error);
+}
+
+}
+
 
 exports.clear = clear;
 exports.build = series(clear, build);
 exports.zip = series( build , zip);
 exports.default = series( build , zip);
+exports.login = series( build, zip, login);
 
 
