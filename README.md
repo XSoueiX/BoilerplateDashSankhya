@@ -5,11 +5,11 @@ Boilerplate para dashboards Sankhya
 
 ## 💻 Pré-requisitos
 
-instalar node
+* Node JS
 
 Recomendado:
 
-VSCode
+* VSCode
 
 ## 🚀 Instalando BoilerPlate Sankhya
 
