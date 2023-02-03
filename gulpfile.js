@@ -14,6 +14,8 @@ const url = '' //informar URL do servidor sankhya que deseja utilizar
 let usuario = '' //Informar usuario para autentificação
 let senha = '' //Informar senha para autentificação
 
+let codgdg = ''  // Numero unico do dashboard
+
 
 
 function build(){
@@ -92,7 +94,7 @@ data: {
         "dataRow":{
                      "key" : {
                            "NUGDG": {
-                     "$": 303
+                     "$": codgdg
                  }
                        },
            "localFields": {
