@@ -20,7 +20,6 @@
     "jquery-sortablejs": "^1.0.1"
   },
   "scripts": {
-    "install": "npm --prefix ../ i",
     "gulp": "npm --prefix ../ run gulp"
   }
 }
