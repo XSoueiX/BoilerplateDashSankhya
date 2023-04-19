@@ -183,7 +183,7 @@ angular.module("moduloTeste", ['standalone.serviceproxy']).service("customUtils"
                     statusMessage = 'Erro não identificado.';
                 }
 
-                deferred.resolve([{ ERRO: statusMessage }]);
+                deferred.reject([{ ERRO: statusMessage }]);
             });
             return deferred.promise;
         }
