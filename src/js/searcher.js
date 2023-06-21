@@ -169,7 +169,7 @@ angular.module("moduloTeste", ['standalone.serviceproxy']).service("customUtils"
                         return;
                     }
                 });
-                if (response.responseBody.hasOwnProperty('queryExecResul')) {
+                if (response.responseBody.hasOwnProperty('queryExecResult')) {
                     if (response.responseBody.queryExecResult.hasOwnProperty('ERRO')) {
                         deferred.reject(response.responseBody.queryExecResult);
                         return;
