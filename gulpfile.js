@@ -27,10 +27,12 @@ function build(){
   .pipe(dest('build/src/libs'));
   var js = src('src/js/**')
   .pipe(dest('build/src/js'));
+  var css = src('src/css/**')
+  .pipe(dest('build/src/css'));
   var node = src('src/node_modules/**')
   .pipe(dest('build/src/node_modules'));
 
-  return merge(entry, index, lib, js, node);
+  return merge(entry, index, lib, js, css, node);
 };
 
 function zip() {
